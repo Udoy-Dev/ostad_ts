@@ -1,17 +1,53 @@
-# ostad_ts
+# 📝 Task Manager App
 
-A new Flutter project.
+A clean, modern, and production-ready **Task Management Application** built using **Flutter** and **REST API**. This application helps users efficiently manage their daily tasks, track progress across different statuses, and maintain their profiles seamlessly.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## ✨ Features
 
-A few resources to get you started if this is your first Flutter project:
+* **🔐 User Authentication:** Secure Login and Registration with form validation.
+* **📊 Task Status Management:** Categorize tasks into **New**, **In Progress**, **Completed**, and **Canceled**.
+* **➕ Create & Update Tasks:** Add new tasks with dynamic descriptions and update task statuses on the fly.
+* **👤 Profile Management:** View and edit user details (First Name, Last Name, Phone Number, Password) with image update support.
+* **⚡ Dynamic UI States:** Seamless state handling with clear **Loading Indicators** and **"No Data Found"** layouts.
+* **🎨 Modern UI/UX:** Styled using custom gradient AppBars, status-based dynamic accent bars, and responsive layouts.
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🛠️ Tech Stack & Architecture
+
+* **Framework:** Flutter (Dart)
+* **Backend Integration:** REST API
+* **State Management:** `setState` (Clean Widget Architecture)
+* **Packages & Tools:**
+    * `http` - Network Requests & API integration
+    * `flutter/services.dart` - Input Formatting & Keyboards
+    * `shared_preferences` - Local Session & Token Storage
+
+---
+
+## 📸 Screenshots
+
+| Login & Home | Task Details & Card | Update Profile |
+| :---: | :---: | :---: |
+| *(Add your screenshot link)* | *(Add your screenshot link)* | *(Add your screenshot link)* |
+
+---
+
+## 🚀 Getting Started
+
+Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
+
+### Prerequisites
+
+Ensure you have the following installed:
+* [Flutter SDK](https://docs.flutter.dev/get-started/install) (latest stable version)
+* [Android Studio](https://developer.android.com/studio) / [VS Code](https://code.visualstudio.com/)
+* Dart SDK
+
+### Installation
+
+1. **Clone the Repository:**
+   ```bash
+   git clone [https://github.com/your-username/task-manager-flutter.git](https://github.com/your-username/task-manager-flutter.git)
