@@ -18,7 +18,6 @@ class DetailScreen extends StatelessWidget {
     this.onDelete,
   });
 
-  // স্ট্যাটাস অনুযায়ী কালার থিম
   Color _getStatusColor() {
     switch (status.toLowerCase()) {
       case 'completed':
@@ -39,18 +38,18 @@ class DetailScreen extends StatelessWidget {
     final statusColor = _getStatusColor();
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC),
+      backgroundColor: Color(0xFFF8FAFC),
       appBar: AppBar(
-        title: const Text('Task Details'),
+        title: Text('Task Details'),
         elevation: 0,
         actions: [
           IconButton(
-            icon: const Icon(Icons.edit_outlined),
+            icon: Icon(Icons.edit_outlined),
             onPressed: onUpdate,
             tooltip: 'Edit Task',
           ),
           IconButton(
-            icon: const Icon(Icons.delete_outline, color: Colors.redAccent),
+            icon: Icon(Icons.delete_outline, color: Colors.redAccent),
             onPressed: onDelete,
             tooltip: 'Delete Task',
           ),
@@ -58,7 +57,7 @@ class DetailScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20.0),
+          padding: EdgeInsets.all(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -87,7 +86,7 @@ class DetailScreen extends StatelessWidget {
                             shape: BoxShape.circle,
                           ),
                         ),
-                        const SizedBox(width: 6),
+                        SizedBox(width: 6),
                         Text(
                           status,
                           style: TextStyle(
@@ -103,15 +102,15 @@ class DetailScreen extends StatelessWidget {
                   // Created Date
                   Row(
                     children: [
-                      const Icon(
+                      Icon(
                         Icons.calendar_today_outlined,
                         size: 16,
                         color: Color(0xFF64748B),
                       ),
-                      const SizedBox(width: 6),
+                      SizedBox(width: 6),
                       Text(
                         date,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 13,
                           fontWeight: FontWeight.w500,
                           color: Color(0xFF64748B),
@@ -122,12 +121,12 @@ class DetailScreen extends StatelessWidget {
                 ],
               ),
 
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
 
               // 2. Task Title
               Text(
                 title,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
                   color: Color(0xFF0F172A),
@@ -135,12 +134,12 @@ class DetailScreen extends StatelessWidget {
                 ),
               ),
 
-              const SizedBox(height: 16),
-              const Divider(color: Color(0xFFE2E8F0), thickness: 1),
-              const SizedBox(height: 16),
+              SizedBox(height: 16),
+              Divider(color: Color(0xFFE2E8F0), thickness: 1),
+              SizedBox(height: 16),
 
               // 3. Description Header
-              const Text(
+              Text(
                 "Description",
                 style: TextStyle(
                   fontSize: 16,
@@ -149,20 +148,20 @@ class DetailScreen extends StatelessWidget {
                 ),
               ),
 
-              const SizedBox(height: 10),
+              SizedBox(height: 10),
 
               // 4. Description Content Box
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.all(16),
+                padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: const Color(0xFFE2E8F0)),
+                  border: Border.all(color: Color(0xFFE2E8F0)),
                 ),
                 child: Text(
                   description.isEmpty ? 'No description provided.' : description,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 15,
                     color: Color(0xFF475569),
                     height: 1.6,
