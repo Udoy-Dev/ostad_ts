@@ -40,6 +40,7 @@ class DetailScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xFFF8FAFC),
       appBar: AppBar(
+        backgroundColor: Colors.grey[200],
         title: Text('Task Details'),
         elevation: 0,
         actions: [
