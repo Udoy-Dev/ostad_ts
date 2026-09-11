@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ostad_ts/Models/ApiResponse.dart';
 import 'package:ostad_ts/Service/ApiCaller.dart';
+import 'package:ostad_ts/Utils/TSManagerURL.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
   final String initialFirstName;
@@ -50,9 +51,20 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
       _inProgress = true;
     });
 
-    // TODO: আপনার API কল/প্রোফাইল আপডেট সার্ভিসটি এখানে বসান
     // final response = await ApiCaller.postRequest(...);
     //final ApiResponse response = await ApiCaller.postRequest(url: url)
+    final ApiResponse response = await ApiCaller.postRequest(url: TSManagerURL.updateProfile,
+      body: {
+        "email": _emailController.text,
+        "firstName": _firstNameController.text,
+        "lastName": _lastNameController.text,
+        "phone": _phoneController.text,
+        "password": _passwordController.text,
+      },
+    );
+    if(response.isSuccess){
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Profile updated successfully")));
+    }
 
     await Future.delayed(const Duration(seconds: 2)); 
 
@@ -124,7 +136,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         right: 0,
                         child: InkWell(
                           onTap: () {
-                            // TODO: ইমেজ পিকার বা গ্যালারি ওপেন করার লজিক
+
                           },
                           child: Container(
                             padding: const EdgeInsets.all(8),
@@ -143,10 +155,10 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 30),
+                SizedBox(height: 30),
 
 
-                const SizedBox(height: 16),
+                SizedBox(height: 16),
 
                 // 3. First Name
                 TextFormField(

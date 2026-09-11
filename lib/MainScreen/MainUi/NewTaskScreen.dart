@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ostad_ts/AuthController/AuthController.dart';
+import 'package:ostad_ts/MainScreen/MainUi/DetailsScreen.dart';
 import 'package:ostad_ts/Models/ApiResponse.dart';
 import 'package:ostad_ts/Models/TaskModel.dart';
 import 'package:ostad_ts/Models/TaskStatusCountModel.dart';
@@ -57,7 +59,6 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
   }
 
   Future<void> getAllStatus() async {
-
     final ApiResponse response = await ApiCaller.getRequest(
       url: TSManagerURL.taskCountStatusUrl,
     );
@@ -87,26 +88,26 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
       backgroundColor: Colors.white,
       body: Column(
         children: [
-          SizedBox(height: 5,),
+          SizedBox(height: 5),
           SizedBox(
             height: 60,
             child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: taskCountByStatus.length,
-                    itemBuilder: (context, index) {
-                      final taskCount = taskCountByStatus[index];
-                      return SizedBox(
-                        width: 100,
-                        child: TaskCount(
-                          title: taskCount.sId.toString(),
-                          count: taskCount.sum!.toInt(),
-                        ),
-                      );
-                    },
-                    separatorBuilder: (BuildContext context, int index) {
-                      return SizedBox(width: 10);
-                    },
+              scrollDirection: Axis.horizontal,
+              itemCount: taskCountByStatus.length,
+              itemBuilder: (context, index) {
+                final taskCount = taskCountByStatus[index];
+                return SizedBox(
+                  width: 100,
+                  child: TaskCount(
+                    title: taskCount.sId.toString(),
+                    count: taskCount.sum!.toInt(),
                   ),
+                );
+              },
+              separatorBuilder: (BuildContext context, int index) {
+                return SizedBox(width: 10);
+              },
+            ),
           ),
           SizedBox(height: 10),
           Expanded(
@@ -118,14 +119,31 @@ class _NewTaskScreenState extends State<NewTaskScreen> {
                     itemCount: taskList.length,
                     itemBuilder: (context, index) {
                       final task = taskList[index];
-                      return TaskItemCard(
-                        taskModel: task,
-                        static: 'New',
-                        refreshParent: () {
-                          getAllTask('New');
-                          getAllStatus();
-                          setState(() {});
+                      return InkWell(
+                        onTap: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetailScreen(
+                                title: task.title.toString(),
+                                description: task.description.toString(),
+                                date: task.createdDate.toString(),
+                                status: task.status.toString(),
+                                onUpdate: (){},
+                                onDelete: (){},
+                              ),
+                            ),
+                          );
                         },
+                        child: TaskItemCard(
+                          taskModel: task,
+                          static: 'New',
+                          refreshParent: () {
+                            getAllTask('New');
+                            getAllStatus();
+                            setState(() {});
+                          },
+                        ),
                       );
                     },
                   ),

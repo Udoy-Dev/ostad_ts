@@ -5,6 +5,7 @@ import '../../Models/TaskModel.dart';
 import '../../Service/ApiCaller.dart';
 import '../../Utils/TSManagerURL.dart';
 import '../../widgets/TaskItemCard.dart';
+import 'DetailsScreen.dart';
 
 class ProgressTask extends StatefulWidget {
   const ProgressTask({super.key});
@@ -73,10 +74,25 @@ class _ProgressTaskState extends State<ProgressTask> {
                 itemCount: taskList.length,
                 itemBuilder: (context, index) {
                   final task = taskList[index];
-                  return TaskItemCard(
-                    taskModel: task,
-                    static: 'Progress',
-                    refreshParent: () {},
+                  return InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailScreen(
+                            title: task.title.toString(),
+                            description: task.description.toString(),
+                            date: task.createdDate.toString(),
+                            status: task.status.toString(),
+                          ),
+                        ),
+                      );
+                    },
+                    child: TaskItemCard(
+                      taskModel: task,
+                      static: 'Progress',
+                      refreshParent: () {},
+                    ),
                   );
                 },
               ),

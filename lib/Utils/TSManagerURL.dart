@@ -7,4 +7,5 @@ class TSManagerURL{
   static String updateTaskStatusURL(String ID, String status) => "$baseUrl/updateTaskStatus/${ID}/${status}";
   static String deleteTaskURL(String ID) => "$baseUrl/deleteTask/${ID}";
   static String addNewTask = "$baseUrl/createTask";
+  static String updateProfile = "$baseUrl/ProfileUpdate";
 }

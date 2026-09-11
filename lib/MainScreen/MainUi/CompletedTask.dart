@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ostad_ts/MainScreen/MainUi/DetailsScreen.dart';
 
 import '../../Models/ApiResponse.dart';
 import '../../Models/TaskModel.dart';
@@ -74,10 +75,25 @@ class _CompletedTaskState extends State<CompletedTask> {
                 itemCount: taskList.length,
                 itemBuilder: (context, index) {
                   final task = taskList[index];
-                  return TaskItemCard(
-                    taskModel: task,
-                    static: 'New',
-                    refreshParent: () {},
+                  return InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailScreen(
+                            title: task.title.toString(),
+                            description: task.description.toString(),
+                            date: task.createdDate.toString(),
+                            status: task.status.toString(),
+                          ),
+                        ),
+                      );
+                    },
+                    child: TaskItemCard(
+                      taskModel: task,
+                      static: 'New',
+                      refreshParent: () {},
+                    ),
                   );
                 },
               ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ostad_ts/AuthController/AuthController.dart';
 
+import '../MainScreen/SetupScreen/LoginScreen.dart';
+
 class TMAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 
@@ -77,7 +79,14 @@ class TMAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            AuthController.logout();
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => LoginScreen()),
+                  (route) => false,
+            );
+          },
           icon: const Icon(Icons.logout_rounded, color: Colors.white),
           tooltip: 'Logout',
         ),

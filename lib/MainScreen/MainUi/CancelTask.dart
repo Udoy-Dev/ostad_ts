@@ -5,6 +5,7 @@ import 'package:ostad_ts/widgets/TaskItemCard.dart';
 import '../../Models/ApiResponse.dart';
 import '../../Service/ApiCaller.dart';
 import '../../Utils/TSManagerURL.dart';
+import 'DetailsScreen.dart';
 
 class CancelTask extends StatefulWidget {
   const CancelTask({super.key});
@@ -74,10 +75,25 @@ class _CancelTaskState extends State<CancelTask> {
                 itemCount: taskList.length,
                 itemBuilder: (context, index) {
                   final task = taskList[index];
-                  return TaskItemCard(
-                    taskModel: task,
-                    static: 'New',
-                    refreshParent: () {},
+                  return InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailScreen(
+                            title: task.title.toString(),
+                            description: task.description.toString(),
+                            date: task.createdDate.toString(),
+                            status: task.status.toString(),
+                          ),
+                        ),
+                      );
+                    },
+                    child: TaskItemCard(
+                      taskModel: task,
+                      static: 'Cancel',
+                      refreshParent: () {},
+                    ),
                   );
                 },
               ),
