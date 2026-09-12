@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ostad_ts/AuthController/AuthController.dart';
+import 'package:ostad_ts/MainScreen/MainUi/MainNavScreen.dart';
 import 'package:ostad_ts/Models/ApiResponse.dart';
+import 'package:ostad_ts/Models/UserModel.dart';
 import 'package:ostad_ts/Service/ApiCaller.dart';
 import 'package:ostad_ts/Utils/TSManagerURL.dart';
 
@@ -42,6 +45,13 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     _lastNameController = TextEditingController(text: widget.initialLastName);
     _phoneController = TextEditingController(text: widget.initialPhone);
     _passwordController = TextEditingController();
+
+    UserModel userModel = AuthController.userData!;
+    _emailController.text = userModel.email.toString();
+    _firstNameController.text = userModel.firstName.toString();
+    _lastNameController.text = userModel.lastName.toString();
+    _phoneController.text = userModel.mobile.toString();
+
   }
 
   Future<void> _onTapUpdateProfile() async {
@@ -53,17 +63,36 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 
     // final response = await ApiCaller.postRequest(...);
     //final ApiResponse response = await ApiCaller.postRequest(url: url)
+
+    Map<String, dynamic> requestBody = {
+      "email": _emailController.text,
+      "firstName": _firstNameController.text,
+      "lastName": _lastNameController.text,
+      "phone": _phoneController.text,
+    };
+
+    if(_passwordController.text.isNotEmpty){
+      requestBody['password'] = _passwordController.text;
+    }
+
     final ApiResponse response = await ApiCaller.postRequest(url: TSManagerURL.updateProfile,
-      body: {
-        "email": _emailController.text,
-        "firstName": _firstNameController.text,
-        "lastName": _lastNameController.text,
-        "phone": _phoneController.text,
-        "password": _passwordController.text,
-      },
+      body: requestBody
+
     );
     if(response.isSuccess){
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Profile updated successfully")));
+      UserModel model = UserModel(
+        id: AuthController.userData!.id,
+        email: _emailController.text,
+        firstName: _firstNameController.text,
+        lastName: _lastNameController.text,
+        mobile: _phoneController.text,
+        //createdDate: AuthController.userData!.createdDate,
+      );
+      await AuthController.updateUserData(model);
+      setState(() {
+
+      });
+      //Navigator.push(context, MaterialPageRoute(builder: (context) => MainNavScreen(),));
     }
 
     await Future.delayed(const Duration(seconds: 2)); 
