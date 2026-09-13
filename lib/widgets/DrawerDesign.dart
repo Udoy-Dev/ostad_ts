@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ostad_ts/MainScreen/MainUi/UpdateProfile.dart';
+import 'package:ostad_ts/MainScreen/SetupScreen/EmailVerificationScreen.dart';
+import 'package:ostad_ts/MainScreen/SetupScreen/LoginScreen.dart';
+import 'package:ostad_ts/MainScreen/SetupScreen/ResetPassword.dart';
 import '../AuthController/AuthController.dart';
 
 
@@ -38,38 +41,10 @@ class DrawerDesign extends StatelessWidget {
             child: ListView(
               padding: EdgeInsets.zero,
               children: [
-                // ListTile(
-                //   leading: Icon(Icons.check_circle_outline, color: Colors.green),
-                //   title: Text('New Tasks'),
-                //   onTap: () {
-                //     Navigator.push(context, MaterialPageRoute(builder: (context) => NewTaskScreen(),));
-                //   },
-                // ),
-                // ListTile(
-                //   leading: Icon(Icons.access_time_rounded, color: Colors.orange),
-                //   title: Text('Progress Tasks'),
-                //   onTap: () {
-                //     Navigator.push(context, MaterialPageRoute(builder: (context) => ProgressTask(),));
-                //   },
-                // ),
-                // ListTile(
-                //   leading: Icon(Icons.task_alt_rounded, color: Colors.cyan),
-                //   title: Text('Completed Tasks'),
-                //   onTap: () {
-                //     Navigator.push(context, MaterialPageRoute(builder: (context) => CompletedTask(),));
-                //   },
-                // ),
-                // ListTile(
-                //   leading: Icon(Icons.cancel, color: Colors.red),
-                //   title: Text('Cancel Tasks'),
-                //   onTap: () {
-                //     Navigator.push(context, MaterialPageRoute(builder: (context) => CancelTask(),));
-                //   },
-                // ),
-                // Divider(),
+
                 ListTile(
                   leading: Icon(Icons.person_outline,color: Colors.green,),
-                  title: Text('Profile'),
+                  title: Text('Profile Update'),
                   onTap: () {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => UpdateProfileScreen(initialFirstName: "${AuthController.userData?.firstName.toString() ?? ''}", initialLastName: "Das", initialEmail: "udoy@gmail.xom", initialPhone: "45524124574"),));
                   },
@@ -81,6 +56,22 @@ class DrawerDesign extends StatelessWidget {
                     Navigator.pop(context);
                   },
                 ),
+                ListTile(
+                  leading: Icon(Icons.verified_outlined, color: Colors.orange),
+                  title: Text('Email Verification Screen'),
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => EmailVerificationScreen(email: AuthController.userData!.email.toString()),));
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.password, color: Colors.blue),
+                  title: Text('Reset Password'),
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ResetPasswordScreen(email: AuthController.userData!.email.toString(), otp: AuthController.userData!.toString()),));
+                  },
+                ),
+
+
               ],
             ),
           ),
@@ -93,14 +84,14 @@ class DrawerDesign extends StatelessWidget {
               style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
             ),
             onTap: () async {
-              // await AuthController.clearData();
-              // if (!context.mounted) return;
-              //
-              // Navigator.pushAndRemoveUntil(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => const LogInScreen()),
-              //       (route) => false,
-              // );
+              await AuthController.logout();
+              if (!context.mounted) return;
+
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => LoginScreen()),
+                    (route) => false,
+              );
             },
           ),
           SizedBox(height: 30),

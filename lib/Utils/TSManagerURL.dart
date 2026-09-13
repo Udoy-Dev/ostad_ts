@@ -8,4 +8,6 @@ class TSManagerURL{
   static String deleteTaskURL(String ID) => "$baseUrl/deleteTask/${ID}";
   static String addNewTask = "$baseUrl/createTask";
   static String updateProfile = "$baseUrl/ProfileUpdate";
+  static String resetPassword = "$baseUrl/RecoverResetPassword";
+  static String emailVerification(String email) => "$baseUrl/RecoverVerifyEmail/$email";
 }
